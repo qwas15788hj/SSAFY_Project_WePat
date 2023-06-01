@@ -1,0 +1,57 @@
+package com.wepat.photo.service;
+
+import com.wepat.photo.CommentDto;
+import com.wepat.photo.PhotoDto;
+import com.wepat.photo.repository.PhotoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
+@Service
+@RequiredArgsConstructor
+public class PhotoServiceImpl implements PhotoService {
+    private final PhotoRepository photoRepository;
+    @Override
+    public List<PhotoDto> getAllPhotoById(String calendarId) throws ExecutionException, InterruptedException {
+        return photoRepository.getAllPhotoById(calendarId);
+    }
+
+    @Override
+    public PhotoDto getPhotoById(String photoId) throws ExecutionException, InterruptedException {
+        return photoRepository.getPhotoById(photoId);
+    }
+
+    @Override
+    public void addPhoto(String calendarId, PhotoDto photoDto) {
+        photoRepository.addPhoto(calendarId, photoDto);
+    }
+
+    @Override
+    public void deletePhoto(String photoId) throws ExecutionException, InterruptedException {
+        photoRepository.deletePhoto(photoId);
+    }
+
+    @Override
+    public void uploadSNSByPhotoId(String photoId, String snsDate) throws InterruptedException, ExecutionException {
+        photoRepository.uploadSNSByPhotoId(photoId, snsDate);
+    }
+
+    @Override
+    public PhotoDto addCommentByPhotoId(String photoId, CommentDto commentDto) throws ExecutionException, InterruptedException {
+        return photoRepository.addCommentByPhotoId(photoId, commentDto);
+    }
+
+    @Override
+    public PhotoDto deleteCommentByPhotoId(String photoId, String commentId) throws ExecutionException, InterruptedException {
+        return photoRepository.deleteCommentByPhotoId(photoId, commentId);
+    }
+
+    @Override
+    public PhotoDto updateCommentByPhotoId(String photoId, String commentId, CommentDto commentDto) throws ExecutionException, InterruptedException {
+        return photoRepository.updateCommentByPhotoId(photoId, commentId, commentDto);
+    }
+
+
+}
